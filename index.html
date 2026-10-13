@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#0077b6">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png">
+<title>Ocean Diorama</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%;overflow:hidden;font-family:"Comic Sans MS","Chalkboard SE","Marker Felt",system-ui,sans-serif;touch-action:manipulation}
+#sea{position:fixed;inset:0;background:linear-gradient(#48cae4 0%,#0096c7 30%,#0077b6 60%,#023e8a 100%);overflow:hidden}
+.ray{position:absolute;top:-10%;width:12%;height:90%;background:linear-gradient(rgba(255,255,255,.35),transparent);transform-origin:top;filter:blur(6px);animation:ray 7s ease-in-out infinite alternate}
+@keyframes ray{from{transform:rotate(-12deg);opacity:.4}to{transform:rotate(10deg);opacity:.8}}
+#sand{position:absolute;bottom:0;left:0;right:0;height:13%;background:radial-gradient(circle at 20% 30%,#fff3 2px,transparent 3px) 0 0/30px 30px,linear-gradient(#f6d58e,#e9b96e);border-radius:50% 50% 0 0/30% 30% 0 0}
+.weed{position:absolute;bottom:8%;transform-origin:bottom center;animation:sway 3s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+.bub{position:absolute;bottom:-20px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:rgba(255,255,255,.15);animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) translateX(20px)}}
+.cr{position:absolute;left:0;top:0;cursor:pointer;will-change:transform}
+.cr svg,.cr .face{display:block;width:100%;height:100%;pointer-events:none}
+.cr.hl{filter:drop-shadow(0 0 12px #ff0) drop-shadow(0 0 22px #ff0)}
+.selfie .face{border-radius:50%;border:5px solid #caf0f8;box-shadow:0 0 0 3px #0096c7,inset 0 0 18px #fff8;background-size:cover;background-position:center}
+.selfie .lbl{position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;color:#023e8a;border-radius:12px;padding:2px 10px;font-size:16px;white-space:nowrap;margin-top:4px}
+#bar{position:fixed;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:rgba(2,62,138,.55);z-index:10}
+button,select{font:inherit;font-size:20px;min-height:56px;padding:8px 18px;border:none;border-radius:28px;background:#ffd60a;color:#023e8a;box-shadow:0 4px 0 #c9a400;cursor:pointer}
+button:active{transform:translateY(3px);box-shadow:0 1px 0 #c9a400}
+select{background:#fff;box-shadow:0 4px 0 #90e0ef}
+#swim{background:#ff70a6;color:#fff;box-shadow:0 4px 0 #c94d7d;font-size:24px}
+.ov{position:fixed;inset:0;background:rgba(0,30,60,.6);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}
+.ov.on{display:flex}
+.card{background:#fff;border-radius:30px;max-width:640px;width:100%;max-height:92vh;overflow:auto;padding:24px;color:#023e8a;border:8px solid #90e0ef;text-align:center}
+.card h2{font-size:40px;margin:4px 0}.card .art{width:180px;height:130px;margin:auto}
+.card ul{text-align:left;font-size:21px;line-height:1.4;padding-left:26px}.card p{font-size:21px;text-align:left;margin:8px 0}
+.card button{margin:8px}
+video,#prev{width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;border-radius:50%;transform:scaleX(-1);border:6px solid #90e0ef;background:#000}
+#prev{transform:none}
+input{font:inherit;font-size:22px;padding:10px 16px;border-radius:20px;border:3px solid #90e0ef;width:80%;max-width:360px;margin:8px}
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#fff;color:#023e8a;padding:12px 24px;border-radius:24px;font-size:20px;z-index:30;display:none}
+#title{position:fixed;top:12px;left:16px;color:#fff;font-size:30px;text-shadow:2px 2px 0 #023e8a;z-index:5;pointer-events:none}
+#tchr{position:fixed;top:8px;right:8px;z-index:11;opacity:.35;min-height:44px;font-size:16px;background:#fff}
+</style></head><body>
+<div id="sea"><div id="sand"></div></div>
+<div id="title">🌊 Our Ocean</div>
+<button id="tchr" aria-label="Teacher">🔒</button>
+<div id="bar">
+<button id="swim">📷 Swim with the fish!</button>
+<select id="pick" aria-label="Creature"></select><button id="add">➕ Add</button>
+<select id="sel" aria-label="Find a swimmer"></select>
+<button id="rm">🧹 Remove all</button><button id="reset">🔄 Reset</button><button id="snap">📸 Snapshot</button>
+</div>
+<div class="ov" id="info"><div class="card" id="infoc"></div></div>
+<div class="ov" id="cam"><div class="card"><h2>Say cheese! 😁</h2>
+<div id="camv"><video id="vid" autoplay playsinline muted></video><br><button id="shoot">📸 Take photo</button></div>
+<div id="camp" style="display:none"><canvas id="prev" width="240" height="240"></canvas><br>
+<input id="nm" maxlength="14" placeholder="Your name (optional)"><br><button id="join">🐠 Jump in!</button><button id="retake">↩️ Try again</button></div>
+<p id="camerr" style="display:none;text-align:center"></p><button id="camx">❌ Close</button></div></div>
+<div class="ov" id="tov"><div class="card"><h2>Teacher</h2><input id="pin" type="password" inputmode="numeric" placeholder="PIN"><br>
+<button id="clr">🗑️ Clear all selfies</button><button id="tx">Close</button></div></div>
+<div id="toast"></div>
+<script src="app.js"></script></body></html>
