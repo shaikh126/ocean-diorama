@@ -2,8 +2,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#0077b6">
-<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png">
-<title>Ocean Diorama</title>
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
+<title>Yusra's Diorama · Teacher: Ms. Wendy</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 html,body{margin:0;height:100%;overflow:hidden;font-family:"Comic Sans MS","Chalkboard SE","Marker Felt",system-ui,sans-serif;touch-action:manipulation}
@@ -35,11 +35,15 @@ video,#prev{width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;border-ra
 #prev{transform:none}
 input{font:inherit;font-size:22px;padding:10px 16px;border-radius:20px;border:3px solid #90e0ef;width:80%;max-width:360px;margin:8px}
 #toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#fff;color:#023e8a;padding:12px 24px;border-radius:24px;font-size:20px;z-index:30;display:none}
-#title{position:fixed;top:12px;left:16px;color:#fff;font-size:30px;text-shadow:2px 2px 0 #023e8a;z-index:5;pointer-events:none}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;background:#03396c}
+#title{position:fixed;top:10px;left:0;right:0;text-align:center;color:#fff;z-index:5;pointer-events:none;text-shadow:0 3px 0 #023e8a,0 0 18px rgba(0,40,90,.8)}
+.t1{font-size:clamp(30px,6vw,58px);font-weight:bold;letter-spacing:1px}.t2{font-size:clamp(18px,3vw,28px);color:#caf0f8}
+.opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px}.opts button{background:#e0f7ff;box-shadow:0 4px 0 #90e0ef}.opts button.on{background:#ff70a6;color:#fff}
+.sw{width:52px;height:52px;min-height:52px;padding:0;border-radius:50%;border:4px solid #fff}.sw.on{border-color:#023e8a;transform:scale(1.15)}
 #tchr{position:fixed;top:8px;right:8px;z-index:11;opacity:.35;min-height:44px;font-size:16px;background:#fff}
 </style></head><body>
-<div id="sea"><div id="sand"></div></div>
-<div id="title">🌊 Our Ocean</div>
+<canvas id="gl"></canvas>
+<div id="title"><div class="t1">🌊 Yusra's Diorama</div><div class="t2">Teacher: Ms. Wendy</div></div>
 <button id="tchr" aria-label="Teacher">🔒</button>
 <div id="bar">
 <button id="swim">📷 Swim with the fish!</button>
@@ -51,9 +55,10 @@ input{font:inherit;font-size:22px;padding:10px 16px;border-radius:20px;border:3p
 <div class="ov" id="cam"><div class="card"><h2>Say cheese! 😁</h2>
 <div id="camv"><video id="vid" autoplay playsinline muted></video><br><button id="shoot">📸 Take photo</button></div>
 <div id="camp" style="display:none"><canvas id="prev" width="240" height="240"></canvas><br>
+<div class="opts" id="kind"><button data-k="mermaid" class="on">🧜‍♀️ Mermaid</button><button data-k="merman">🧜‍♂️ Merman</button></div><div class="opts" id="tails"></div>
 <input id="nm" maxlength="14" placeholder="Your name (optional)"><br><button id="join">🐠 Jump in!</button><button id="retake">↩️ Try again</button></div>
 <p id="camerr" style="display:none;text-align:center"></p><button id="camx">❌ Close</button></div></div>
 <div class="ov" id="tov"><div class="card"><h2>Teacher</h2><input id="pin" type="password" inputmode="numeric" placeholder="PIN"><br>
 <button id="clr">🗑️ Clear all selfies</button><button id="tx">Close</button></div></div>
 <div id="toast"></div>
-<script src="app.js"></script></body></html>
+<script type="module" src="app.js"></script></body></html>
