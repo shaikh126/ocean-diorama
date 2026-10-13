@@ -35,14 +35,16 @@ video,#prev{width:100%;max-width:420px;aspect-ratio:1;object-fit:cover;border-ra
 #prev{transform:none}
 input{font:inherit;font-size:22px;padding:10px 16px;border-radius:20px;border:3px solid #90e0ef;width:80%;max-width:360px;margin:8px}
 #toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#fff;color:#023e8a;padding:12px 24px;border-radius:24px;font-size:20px;z-index:30;display:none}
-#gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;background:#03396c}
 #title{position:fixed;top:10px;left:0;right:0;text-align:center;color:#fff;z-index:5;pointer-events:none;text-shadow:0 3px 0 #023e8a,0 0 18px rgba(0,40,90,.8)}
-.t1{font-size:clamp(30px,6vw,58px);font-weight:bold;letter-spacing:1px}.t2{font-size:clamp(18px,3vw,28px);color:#caf0f8}
+.t1{font-size:clamp(30px,6vw,58px);font-weight:bold}.t2{font-size:clamp(18px,3vw,28px);color:#caf0f8}
 .opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px}.opts button{background:#e0f7ff;box-shadow:0 4px 0 #90e0ef}.opts button.on{background:#ff70a6;color:#fff}
 .sw{width:52px;height:52px;min-height:52px;padding:0;border-radius:50%;border:4px solid #fff}.sw.on{border-color:#023e8a;transform:scale(1.15)}
+.mer svg{position:absolute;inset:0}.mer .face{position:absolute;left:24%;top:7.5%;width:52%;height:32.5%;border:4px solid #ffd60a;box-shadow:none}
+.mer .tail{animation:swish 1.1s ease-in-out infinite alternate}.mer .arm{animation:wave 1.6s ease-in-out infinite alternate}
+@keyframes swish{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}@keyframes wave{from{transform:rotate(-12deg)}to{transform:rotate(18deg)}}
 #tchr{position:fixed;top:8px;right:8px;z-index:11;opacity:.35;min-height:44px;font-size:16px;background:#fff}
 </style></head><body>
-<canvas id="gl"></canvas>
+<div id="sea"><div id="sand"></div></div>
 <div id="title"><div class="t1">🌊 Yusra's Diorama</div><div class="t2">Teacher: Ms. Wendy</div></div>
 <button id="tchr" aria-label="Teacher">🔒</button>
 <div id="bar">
@@ -61,4 +63,4 @@ input{font:inherit;font-size:22px;padding:10px 16px;border-radius:20px;border:3p
 <div class="ov" id="tov"><div class="card"><h2>Teacher</h2><input id="pin" type="password" inputmode="numeric" placeholder="PIN"><br>
 <button id="clr">🗑️ Clear all selfies</button><button id="tx">Close</button></div></div>
 <div id="toast"></div>
-<script type="module" src="app.js"></script></body></html>
+<script src="app.js"></script></body></html>
